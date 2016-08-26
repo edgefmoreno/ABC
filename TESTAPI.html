@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TEST API</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body>
+	<h3>Pruebas para  API ABC</h3>
+
+	<h5>GET</h5>
+	<script>
+		var url="http://localhost.org/abc/index.php/api/Usuarios";
+		var get=$.get(url,function(data){
+			console.log(data);
+		});
+	</script>
+	<h5>Termina GET</h5>
+	<h5>POST</h5>
+	<form id="form" method="post" >
+		id: <input type="number", name="post_id", id="form_id" > <br>
+		us: <input type="text", name="post_us", id="form_us" > <br>
+		e-mail: <input type="email", name="post_email", id="form_email" > <br>
+		pass: <input type="password", name="post_pass", id="form_pass" > <br>
+		born: <input type="date", name="post_born", id="form_date" > <br>
+		<input type="radio" name="post_status" value="1" checked> Activo<br>
+  		<input type="radio" name="post_status" value="0"> Inactivo<br>
+		<input type="submit" value="ADD" id="btn_post">
+	</form>	
+	<script>
+		var url="http://localhost.org/abc/index.php/api/Usuarios";
+		$('#btn_post').click(function() {
+			//alert("no me presiones!");
+			$.ajax({
+				type:"POST",
+				url: url,
+				data: $('#form').serialize(),
+				success:function(data){
+					console.log(data);
+				}
+			});
+			return false;
+		} );
+
+	</script>
+	<h5>Termina POST</h5>
+	<h5>PUT</h5>
+		1 buscamos el registro
+	<h5>termina PUT</h5>
+</body>
+</html>
