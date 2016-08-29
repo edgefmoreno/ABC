@@ -6,19 +6,33 @@
 	<script type="text/javascript" src="jquery.min.js"></script>
 </head>
 <body>
+
 	<h3>Pruebas para  API ABC</h3>
 
 	<h5>GET</h5>
+	<form  id="form_get">
+		<input type="submit", value="GET", id="btn_get">
+	</form>
+	<p id="data"></p>
 	<script>
-		var url="http://localhost.org/abc/index.php/api/Usuarios";
+		var url="http://localhost.org/abc/index.php/api/Users";
+		
 		var get=$.get(url,function(data){
-			console.log(data);
+			var i;
+			var out = "<table border='1'>";
+			for(i = 0; i < data.length; i++) {
+				out += "<tr><td>" +
+				JSON.stringify(data[i]) +"</td></tr>"; 	
+			}
+			out += "</table>";
+			document.getElementById("data").innerHTML = out;
 		});
 	</script>
 	<h5>Termina GET</h5>
 	<h5>POST</h5>
-	<form id="form" method="post" >
-		id: <input type="number", name="post_id", id="form_id" > <br>
+	<form id="form_post" method="post" >
+		id:   <input type="number", name="post_id", id="form_id" > <br>
+		type: <input type="number", name="post_type", id="form_type" > <br>
 		us: <input type="text", name="post_us", id="form_us" > <br>
 		e-mail: <input type="email", name="post_email", id="form_email" > <br>
 		pass: <input type="password", name="post_pass", id="form_pass" > <br>
@@ -28,24 +42,57 @@
 		<input type="submit" value="ADD" id="btn_post">
 	</form>	
 	<script>
-		var url="http://localhost.org/abc/index.php/api/Usuarios";
-		$('#btn_post').click(function() {
+		var url="http://localhost.org/abc/index.php/api/Users";
+		$('#btn_post').click(function(e) {
 			//alert("no me presiones!");
 			$.ajax({
 				type:"POST",
 				url: url,
-				data: $('#form').serialize(),
+				data: $('#form_post').serialize(),
 				success:function(data){
 					console.log(data);
 				}
 			});
 			return false;
 		} );
-
 	</script>
 	<h5>Termina POST</h5>
+
+
 	<h5>PUT</h5>
-		1 buscamos el registro
+		Modificaremos el password del usuario ID
+		<form id="form_put" method="put" >
+			id:   <input type="number", name="post_id", id="form_id" > 
+			new pass: <input type="password", name="post_pass", id="form_pass" > <br>
+			<input type="submit" value="cambiar password" id="btn_put">
+		</form>	
+		
+	<script>
+		var url="http://localhost.org/abc/index.php/api/Users";
+		$('#btn_put').click(function(e) {
+			var x = 2;
+			alert(x);
+
+			return false;
+		} );
+	</script>
+
+
+
+
 	<h5>termina PUT</h5>
+
+
+
+	<h5>DELETE</h5>
+	Eliminamos el usuario ID
+		<form id="form_del" method="delete" >
+			id:   <input type="number", name="post_id", id="form_id" >  <br>
+			<input type="submit" value="Eliminar" id="btn_del">
+		</form>	
+
+
+
+
 </body>
 </html>
